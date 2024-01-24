@@ -76,11 +76,7 @@ lspconfig.jsonls.setup {
 
 lspconfig.omnisharp.setup {
   capabilities = capabilities,
-  on_attach = on_attach,
-  cmd = {
-    'dotnet',
-    "C:\\Users\\matthew.mantle\\AppData\\Local\\nvim-data\\mason\\packages\\omnisharp\\libexec\\OmniSharp.dll"
-  }
+  on_attach = on_attach
 }
 
 lspconfig.tsserver.setup {
