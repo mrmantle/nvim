@@ -20,11 +20,42 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set({ 'n', 'x' }, '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+  if client.supports_method('textDocument/formatting') then
+    local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
+    local event = 'BufWritePre'
+    local async = event == 'BufWritePost'
+    vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+    vim.api.nvim_create_autocmd(event, {
+      buffer = bufnr,
+      group = group,
+      callback = function()
+        vim.lsp.buf.format({ bufnr = bufnr, async = async })
+      end,
+      desc = '[lsp] format on save',
+    })
+  end
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+require('null-ls').setup()
+require('prettier').setup({
+  bin = 'prettierd',
+  filetypes = {
+    "css",
+    "graphql",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "less",
+    "markdown",
+    "scss",
+    "yaml",
+  },
+})
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 
 lspconfig.clangd.setup {
@@ -61,17 +92,26 @@ lspconfig.marksman.setup {
 
 lspconfig.html.setup {
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
+  init_options = {
+    provideFormatter = false
+  }
 }
 
 lspconfig.cssls.setup {
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
+  init_options = {
+    provideFormatter = false
+  }
 }
 
 lspconfig.jsonls.setup {
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
+  init_options = {
+    provideFormatter = false
+  }
 }
 
 lspconfig.omnisharp.setup {
