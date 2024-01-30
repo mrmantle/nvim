@@ -117,29 +117,14 @@ function M.load_syntax(colours)
   syntax['@CSharpMemberAccess'] = { fg = colours.violet }
   syntax['@CSharpConstructorAssignment'] = { fg = colours.violet }
 
-  --Barbar--
-  syntax['BufferCurrent'] = { fg = colours.white, bg = colours.purpleSky }
-  syntax['BufferCurrentIndex'] = { fg = colours.white, bg = colours.purpleSky }
-  syntax['BufferCurrentMod'] = { fg = colours.white, bg = colours.purpleSky }
-  syntax['BufferCurrentSign'] = { fg = colours.white, bg = colours.purpleSky }
-  syntax['BufferCurrentTarget'] = { fg = colours.white, bg = colours.purpleSky }
-  syntax['BufferVisible'] = { fg = colours.white, bg = colours.night }
-  syntax['BufferVisibleIndex'] = { fg = colours.white, bg = colours.night }
-  syntax['BufferVisibleMod'] = { fg = colours.white, bg = colours.night }
-  syntax['BufferVisibleSign'] = { fg = colours.white, bg = colours.night }
-  syntax['BufferVisibleTarget'] = { fg = colours.white, bg = colours.night }
-  syntax['BufferInactive'] = { fg = colours.white, bg = colours.night }
-  syntax['BufferInactiveIndex'] = { fg = colours.white, bg = colours.night }
-  syntax['BufferInactiveMod'] = { fg = colours.white, bg = colours.night }
-  syntax['BufferInactiveSign'] = { fg = colours.white, bg = colours.night }
-  syntax['BufferInactiveTarget'] = { fg = colours.white, bg = colours.night }
+  --Lualine--
+  syntax['lualineActiveBuffer'] = { fg = colours.maastrichtBlue, bg = colours.jasmine }
 
-  --NvimTree--
-  syntax['NvimTreeFolderName'] = { fg = colours.darkSkyBlue }
-  syntax['NvimTreeOpenedFolderName'] = { fg = colours.darkSkyBlue }
-  syntax['NvimTreeExecFile'] = { fg = colours.magenta }
-  syntax['NvimTreeCursorLine'] = { bg = colours.night }
-  syntax['NvimTreeCursorColumn'] = { bg = colours.night }
+  --Netrw--
+  syntax['netrwGray'] = { bg = colours.night }
+  syntax['Folded'] = { bg = colours.night }
+  syntax['FoldColumn'] = { bg = colours.night }
+  syntax['CursorLine'] = { bg = colours.night }
 
   --Lsp--
   syntax['@lsp.type.variable'] = { fg = nil }

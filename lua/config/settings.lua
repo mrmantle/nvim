@@ -1,8 +1,11 @@
+vim.g.netrw_liststyle = 3
+vim.g.netrw_banner = 0
+
 vim.o.termguicolors = true
 vim.o.background = 'dark'
 
-vim.cmd([[colorscheme rsharpr]])
-vim.cmd([[syntax on]])
+vim.cmd('colorscheme rsharpr')
+vim.cmd('syntax on')
 
 vim.o.hlsearch = true
 vim.o.nu = true

@@ -5,8 +5,6 @@ return require('packer').startup(function(use)
   use { 'nvimtools/none-ls.nvim' }
   use { 'MunifTanjim/prettier.nvim' }
   use { 'hoob3rt/lualine.nvim' }
-  use { 'romgrk/barbar.nvim' }
-  use { 'nvim-tree/nvim-tree.lua' }
   use { 'tpope/vim-fugitive' }
   use { 'lewis6991/gitsigns.nvim' }
   use { 'theHamsta/nvim-dap-virtual-text' }
