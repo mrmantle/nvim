@@ -42,16 +42,18 @@ require('null-ls').setup()
 require('prettier').setup({
   bin = 'prettierd',
   filetypes = {
-    "css",
-    "graphql",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "less",
-    "markdown",
-    "scss",
-    "yaml",
+    'css',
+    'graphql',
+    'html',
+    'javascript',
+    'javascriptreact',
+    'json',
+    'less',
+    'markdown',
+    'scss',
+    'typescript',
+    'typescriptreact',
+    'yaml',
   },
 })
 
@@ -121,7 +123,10 @@ lspconfig.omnisharp.setup {
 
 lspconfig.tsserver.setup {
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
+  init_options = {
+    provideFormatter = false
+  }
 }
 
 lspconfig.eslint.setup {

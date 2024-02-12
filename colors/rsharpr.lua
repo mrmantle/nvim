@@ -28,6 +28,7 @@ local colours = {
   purpleSky = { '#7c7cff', 12 },
   red = { '#ff3333', 9 },
   snow = { '#add8e6', 15 },
+  snowIce = { '#45565c', 8 },
   sunny = { '#eeee82', 11 },
   superMoonBlue = { '#91a3b0', 8 },
   superMoonGrey = { '#c9c9c9', 8 },

@@ -6,23 +6,25 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', 'cp', 'yap<S-}>p')
 vim.keymap.set('n', '<leader>a', '=ip')
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d')
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 
 -- Copy/Paste
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y')
-vim.keymap.set('n', '<leader>Y', '"+Y')
-vim.keymap.set({ 'n', 'v' }, '<C-P>', '"+p')
-vim.keymap.set('x', '<leader>p', '"_dP')
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p')
+vim.keymap.set('x', '<leader>r', '"_dP')
 
 -- Search/Replace
 vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('n', '<leader>o', ':nohlsearch <CR>', { silent = true })
 
 -- Diagnostics
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+-- Lsp
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 
 -- Navigation
 vim.keymap.set('n', '<C-H>', '<C-W>h')
