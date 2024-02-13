@@ -21,14 +21,14 @@ function M.load_syntax(colours)
   syntax['Comment'] = { fg = colours.darkCyan }
   syntax['Conditional'] = { fg = colours.darkSkyBlue }
   syntax['Constant'] = { fg = colours.violet }
-  syntax['Debug'] = { fg = colours.purple }
+  syntax['Debug'] = { fg = colours.blacklight }
   syntax['Define'] = { fg = colours.snow }
   syntax['Delimiter'] = { fg = colours.gainsboro }
   syntax['Directory'] = { fg = colours.darkSkyBlue }
   syntax['EndOfBuffer'] = { fg = colours.black }
   syntax['Error'] = { fg = colours.imperialRed, bg = colours.black }
   syntax['ErrorMsg'] = { fg = colours.imperialRed }
-  syntax['Exception'] = { fg = colours.darkSkyBlue }
+  syntax['Exception'] = { fg = colours.imperialRed }
   syntax['Float'] = { fg = colours.snow }
   syntax['Function'] = { fg = colours.cyan }
   syntax['Identifier'] = { fg = colours.darkSkyBlue }
@@ -37,7 +37,7 @@ function M.load_syntax(colours)
   syntax['Keyword'] = { fg = colours.darkSkyBlue }
   syntax['Label'] = { fg = colours.snow }
   syntax['LineNR'] = { fg = colours.snow }
-  syntax['Macro'] = { fg = colours.gainsboro }
+  syntax['Macro'] = { fg = colours.paleViolet }
   syntax['Normal'] = { fg = colours.gainsboro }
   syntax['Number'] = { fg = colours.snow }
   syntax['Numeric'] = { fg = colours.snow }
@@ -57,8 +57,9 @@ function M.load_syntax(colours)
   syntax['StorageClass'] = { fg = colours.snow }
   syntax['String'] = { fg = colours.tumbleweed }
   syntax['Structure'] = { fg = colours.snow }
-  syntax['TabLine'] = { bg = colours.black }
-  syntax['TabLineFill'] = { bg = colours.black }
+  syntax['TabLine'] = { fg = colours.white, bg = colours.night }
+  syntax['TabLineFill'] = { fg = colours.night, bg = colours.night }
+  syntax['TabLineSel'] = { fg = colours.white, bg = colours.purpleSky }
   syntax['Tag'] = { fg = colours.darkSkyBlue }
   syntax['Title'] = { fg = colours.magenta }
   syntax['Todo'] = { fg = colours.imperialRed }
@@ -89,8 +90,6 @@ function M.load_syntax(colours)
   syntax['luaTSPunctBracket'] = syntax['Bracket']
 
   --Markdown--
-  syntax['markdownBlockquote'] = { fg = colours.purpleSky }
-  syntax['@text.literal'] = { fg = colours.purpleSky }
   syntax['@punctuation.special'] = syntax['Label']
   syntax['@markup.heading'] = syntax['Title']
   syntax['@markup.link.label'] = syntax['Identifier']
@@ -104,14 +103,14 @@ function M.load_syntax(colours)
   --Treesitter--
   syntax['@field'] = { fg = colours.darkSkyBlue }
   syntax['@variable'] = { fg = colours.winter }
-  syntax['@function.macro'] = syntax['Function']
+  syntax['@function.macro'] = syntax['Macro']
   syntax['@function.builtin'] = syntax['Function']
   syntax['@function.call'] = syntax['Function']
   syntax['@constant.builtin'] = syntax['Constant']
-  syntax['@boolean'] = syntax['Boolean']
   syntax['@type.qualifier'] = syntax['Keyword']
   syntax['@type.builtin'] = syntax['Keyword']
   syntax['@include'] = syntax['Keyword']
+  syntax['@boolean'] = syntax['Boolean']
 
   --C#--
   syntax['@CSharpMemberAccess'] = { fg = colours.violet }
@@ -127,7 +126,7 @@ function M.load_syntax(colours)
   syntax['CursorLine'] = { bg = colours.night }
 
   --Lsp--
-  syntax['@lsp.type.variable'] = { fg = nil }
+  syntax['@lsp.type.variable'] = { fg = colours.winter }
   syntax['@lsp.type.namespace'] = syntax['Identifier']
   syntax['@lsp.type.macro'] = syntax['Macro']
 
@@ -141,14 +140,14 @@ function M.load_syntax(colours)
   syntax['TelescopeNormal'] = { fg = colours.gainsboro, bg = colours.night }
   syntax['TelescopeMatching'] = { fg = colours.sunny }
 
+  --Quickfix--
+  syntax['QuickFixLine'] = { fg = colours.black, bg = colours.violet }
+
   --Git--
   syntax['DiffAdd'] = { fg = colours.darkSkyBlue }
   syntax['DiffChange'] = { fg = colours.magenta }
   syntax['DiffDelete'] = { fg = colours.darkCyan }
   syntax['DiffText'] = { bg = colours.night }
-
-  --Quickfix--
-  syntax['QuickFixLine'] = { fg = colours.black, bg = colours.violet }
 
   --Dap--
   syntax['NvimDapVirtualText'] = { fg = colours.night }
