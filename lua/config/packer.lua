@@ -13,7 +13,7 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   }
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.5',
+    'nvim-telescope/telescope.nvim', tag = '0.1.6',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim',
@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
   }
   use {
     'rcarriga/nvim-dap-ui',
-    requires = { 'mfussenegger/nvim-dap' }
+    requires = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' }
   }
   use({
     "iamcco/markdown-preview.nvim",
