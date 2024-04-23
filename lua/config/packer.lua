@@ -3,7 +3,6 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/playground' }
   use { 'neovim/nvim-lspconfig' }
   use { 'nvimtools/none-ls.nvim' }
-  use { 'MunifTanjim/prettier.nvim' }
   use { 'hoob3rt/lualine.nvim' }
   use { 'tpope/vim-fugitive' }
   use { 'lewis6991/gitsigns.nvim' }

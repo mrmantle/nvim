@@ -1,7 +1,7 @@
 require('mason').setup()
 require('mason-lspconfig').setup()
 
-local common_on_attach = function(client, bufnr)
+local common = function(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -22,9 +22,9 @@ local common_on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 end
 
-local lsp_formatting = function(bufnr, async)
+local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
-    async = async,
+    async = false,
     filter = function(client)
       return client.name ~= 'tsserver'
     end,
@@ -32,47 +32,30 @@ local lsp_formatting = function(bufnr, async)
   })
 end
 
-local formatting_callback = function(client, bufnr)
+local formatting = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set({ 'n', 'x' }, '<leader>f', function() lsp_formatting(bufnr) end, bufopts)
   if client.supports_method('textDocument/formatting') then
-    local group = vim.api.nvim_create_augroup('lsp_format_on_save', { clear = false })
+    local group = vim.api.nvim_create_augroup('LspFormatOnSave', { clear = false })
     local event = 'BufWritePre'
-    local async = event == 'BufWritePost'
     vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
     vim.api.nvim_create_autocmd(event, {
       buffer = bufnr,
       group = group,
-      callback = function() lsp_formatting(bufnr, async) end,
-      desc = '[lsp] format on save',
+      callback = function() lsp_formatting(bufnr) end
     })
   end
 end
 
-require('null-ls.init').setup {
+local null_ls = require('null-ls')
+null_ls.setup {
   on_attach = function(client, bufnr)
-    formatting_callback(client, bufnr)
-  end
+    formatting(client, bufnr)
+  end,
+  sources = {
+    null_ls.builtins.formatting.prettierd
+  }
 }
-
-local prettier = require('prettier')
-prettier.setup({
-  bin = 'prettierd',
-  filetypes = {
-    'css',
-    'graphql',
-    'html',
-    'javascript',
-    'javascriptreact',
-    'json',
-    'less',
-    'markdown',
-    'scss',
-    'typescript',
-    'typescriptreact',
-    'yaml',
-  },
-})
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
@@ -80,16 +63,16 @@ local lspconfig = require('lspconfig')
 lspconfig.clangd.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
-    formatting_callback(client, bufnr)
+    common(client, bufnr)
+    formatting(client, bufnr)
   end
 }
 
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
-    formatting_callback(client, bufnr)
+    common(client, bufnr)
+    formatting(client, bufnr)
   end,
   settings = {
     Lua = {
@@ -113,50 +96,59 @@ lspconfig.lua_ls.setup {
 lspconfig.marksman.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
+    common(client, bufnr)
   end,
 }
 
 lspconfig.html.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
-  end
+    common(client, bufnr)
+  end,
+  init_options = {
+    provideFormatter = false
+  }
 }
 
 lspconfig.cssls.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
-  end
+    common(client, bufnr)
+  end,
+  init_options = {
+    provideFormatter = false
+  }
 }
 
 lspconfig.jsonls.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
-  end
+    common(client, bufnr)
+  end,
+  init_options = {
+    provideFormatter = false
+  }
 }
 
 lspconfig.omnisharp.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
-    formatting_callback(client, bufnr)
+    common(client, bufnr)
+    formatting(client, bufnr)
   end
 }
 
 lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
+    common(client, bufnr)
   end
 }
 
 lspconfig.eslint.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
+    common(client, bufnr)
   end
 }
 
@@ -164,6 +156,6 @@ lspconfig.angularls.setup {
   root_dir = lspconfig.util.root_pattern('angular.json', 'project.json'),
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    common_on_attach(client, bufnr)
+    common(client, bufnr)
   end
 }

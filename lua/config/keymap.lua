@@ -6,7 +6,6 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', 'cp', 'yap<S-}>p')
 vim.keymap.set('n', '<leader>a', '=ip')
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d')
-vim.keymap.set({ 'n', 'x' }, '<leader>f', ':Prettier <CR>', { silent = true })
 
 -- Copy/Paste
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y')
