@@ -9,6 +9,7 @@ require('nvim-treesitter.configs').setup {
     'html',
     'markdown',
     'markdown_inline',
+    'sql',
     'typescript'
   },
   sync_install = false,

@@ -40,6 +40,7 @@ function M.load_syntax(colours)
   syntax['Macro'] = { fg = colours.paleViolet }
   syntax['Normal'] = { fg = colours.gainsboro }
   syntax['Number'] = { fg = colours.snow }
+  syntax['NormalFloat'] = { fg = colours.gainsboro, bg = colours.night }
   syntax['Numeric'] = { fg = colours.snow }
   syntax['Operator'] = { fg = colours.gainsboro }
   syntax['Pmenu'] = { fg = colours.gainsboro, bg = colours.night }
@@ -143,11 +144,16 @@ function M.load_syntax(colours)
   --Quickfix--
   syntax['QuickFixLine'] = { fg = colours.black, bg = colours.violet }
 
-  --Git--
+  --Diff--
   syntax['DiffAdd'] = { fg = colours.darkSkyBlue }
-  syntax['DiffChange'] = { fg = colours.magenta }
-  syntax['DiffDelete'] = { fg = colours.darkCyan }
+  syntax['DiffChange'] = { fg = colours.jasmine }
+  syntax['DiffDelete'] = { fg = colours.magenta }
   syntax['DiffText'] = { bg = colours.night }
+
+  --Git--
+  syntax['Added'] = { fg = colours.darkSkyBlue }
+  syntax['Changed'] = { fg = colours.jasmine }
+  syntax['Removed'] = { fg = colours.magenta }
 
   --Dap--
   syntax['NvimDapVirtualText'] = { fg = colours.night }
