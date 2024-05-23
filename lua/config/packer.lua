@@ -12,7 +12,7 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   }
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.6',
+    'nvim-telescope/telescope.nvim', tag = '0.1.7',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim',
