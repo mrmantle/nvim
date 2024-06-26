@@ -93,6 +93,7 @@ function M.load_syntax(colours)
   --Markdown--
   syntax['@punctuation.special'] = syntax['Label']
   syntax['@markup.heading'] = syntax['Title']
+  syntax['@markup.link'] = syntax['Normal']
   syntax['@markup.link.label'] = syntax['Identifier']
   syntax['@markup.link.url'] = { fg = colours.frenchSkyBlue }
   syntax['@markup.list'] = { fg = colours.paleViolet }
