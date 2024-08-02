@@ -1,6 +1,8 @@
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
 vim.g.netrw_keepdir = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
 
 vim.o.termguicolors = true
 vim.o.background = 'dark'
@@ -24,7 +26,7 @@ vim.o.expandtab = true
 vim.diagnostic.config({
   virtual_text = false,
   float = {
-    source = 'always'
+    source = true
   }
 })
 
