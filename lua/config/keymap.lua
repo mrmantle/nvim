@@ -40,5 +40,5 @@ vim.keymap.set('n', '<A-l>', ':bn<CR>', { silent = true })
 vim.keymap.set('n', '<A-h>', ':bp<CR>', { silent = true })
 vim.keymap.set('n', '<A-x>', ':bd<CR>', { silent = true })
 
--- Netrw
-vim.keymap.set('n', '<leader>t', ':Rex<CR>', { silent = true })
+-- Telescope File Browser
+vim.keymap.set('n', '<leader>fe', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { silent = true })
