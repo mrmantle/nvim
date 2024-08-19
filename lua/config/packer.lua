@@ -12,15 +12,20 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   }
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.8',
-    requires = { { 'nvim-lua/plenary.nvim' } }
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.8',
+    requires = { 'nvim-lua/plenary.nvim' }
   }
   use {
-    "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  }
-  use { 'nvim-telescope/telescope-fzf-native.nvim',
+    'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
+  }
+  use {
+    'nvim-telescope/telescope-file-browser.nvim',
+    requires = {
+      'nvim-telescope/telescope.nvim',
+      'nvim-lua/plenary.nvim'
+    }
   }
   use {
     'williamboman/mason.nvim',
@@ -31,17 +36,17 @@ return require('packer').startup(function(use)
     requires = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' }
   }
   use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end
+    'iamcco/markdown-preview.nvim',
+    run = function() vim.fn['mkdp#util#install']() end
   })
   use {
-    "hrsh7th/nvim-cmp",
+    'hrsh7th/nvim-cmp',
     requires = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/vim-vsnip",
-      "hrsh7th/cmp-path"
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/vim-vsnip',
+      'hrsh7th/cmp-path'
     }
   }
 end)

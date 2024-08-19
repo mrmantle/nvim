@@ -6,7 +6,7 @@ local utils = require('rsharpr.utils')
 
 cmd('hi clear')
 
-if fn.exists("syntax_on") then
+if fn.exists('syntax_on') then
   cmd('syntax reset')
 end
 
@@ -138,9 +138,11 @@ function M.load_syntax(colours)
 
   --Telescope--
   syntax['TelescopePromptCounter'] = { fg = colours.snow }
-  syntax['TelescopeSelection'] = { fg = colours.black, bg = colours.violet }
+  syntax['TelescopeSelection'] = { bg = colours.snowIce }
   syntax['TelescopeNormal'] = { fg = colours.gainsboro, bg = colours.night }
   syntax['TelescopeMatching'] = { fg = colours.sunny }
+  syntax['TelescopePreviewExecute'] = { fg = colours.magenta }
+  syntax['TelescopePreviewSize'] = { fg = colours.winter }
 
   --Quickfix--
   syntax['QuickFixLine'] = { fg = colours.black, bg = colours.violet }

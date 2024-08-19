@@ -4,11 +4,11 @@
 set background=dark
 hi clear
 
-if exists("syntax_on")
+if exists('syntax_on')
     syntax reset
 endif
 
-let g:colors_name = "elflords"
+let g:colors_name = 'elflords'
 
 " Syntax highlighting
 hi Comment	guifg=DarkCyan	ctermfg=DarkCyan	term=bold
