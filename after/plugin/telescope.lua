@@ -11,7 +11,7 @@ require('telescope').setup {
   defaults = {
     layout_strategy = 'flex',
     layout_config = {
-      flip_columns = 150,
+      flip_columns = 160,
       horizontal = {
         prompt_position = 'top',
         width = { padding = 0 },
