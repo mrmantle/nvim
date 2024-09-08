@@ -60,6 +60,10 @@ return {
       request = 'launch',
       cwd = '${fileDirname}',
       program = get_dll,
+      env = {
+        ASPNETCORE_ENVIRONMENT = 'Development',
+        ASPNETCORE_URLS = 'http://localhost:5050',
+      },
     }
 
     local dapui = require('dapui')

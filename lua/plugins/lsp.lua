@@ -60,16 +60,24 @@ return {
               end,
             })
           end
+
+          if client and client.name == 'ts_ls' then
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end
         end,
       })
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-
+      local lspconfig = require('lspconfig')
       local servers = {
-        angularls = {},
+        angularls = {
+          root_dir = lspconfig.util.root_pattern('angular.json', 'project.json'),
+        },
         marksman = {},
-        eslint = {},
+        csharp_ls = {},
+        tsserver = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -89,18 +97,20 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'prettierd',
+        'eslint_d',
         'netcoredbg',
+        'csharpier',
         'stylua',
       })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
-
-      servers = vim.tbl_extend('force', servers, { ts_ls = {} })
-
       require('mason-lspconfig').setup({
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            if server_name == 'tsserver' then
+              server_name = 'ts_ls'
+            end
             require('lspconfig')[server_name].setup(server)
           end,
         },

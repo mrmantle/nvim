@@ -3,12 +3,7 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-if os.getenv('XDG_SESSION_TYPE') ~= 'tty' then
-  vim.opt.termguicolors = true
-else
-  vim.opt.termguicolors = false
-end
-
+vim.opt.termguicolors = true
 vim.opt.background = 'dark'
 
 vim.opt.ignorecase = true
