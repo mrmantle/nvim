@@ -76,8 +76,7 @@ return {
           root_dir = lspconfig.util.root_pattern('angular.json', 'project.json'),
         },
         marksman = {},
-        csharp_ls = {},
-        tsserver = {},
+        ts_ls = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -108,9 +107,6 @@ return {
           function(server_name)
             local server = servers[server_name] or {}
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            if server_name == 'tsserver' then
-              server_name = 'ts_ls'
-            end
             require('lspconfig')[server_name].setup(server)
           end,
         },
