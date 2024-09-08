@@ -1,3 +1,3 @@
 require('config.keymap')
-require('config.settings')
-require('config.packer')
+require('config.option')
+require('config.lazy')

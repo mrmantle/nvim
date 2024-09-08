@@ -16,11 +16,12 @@ function M.load_syntax(colours)
   local syntax = {}
 
   syntax['Boolean'] = { fg = colours.darkSkyBlue }
-  syntax['Bracket'] = { fg = colours.gainsboro }
+  syntax['Bracket'] = { fg = colours.periwinkle }
   syntax['Character'] = { fg = colours.gainsboro }
   syntax['Comment'] = { fg = colours.darkCyan }
   syntax['Conditional'] = { fg = colours.darkSkyBlue }
   syntax['Constant'] = { fg = colours.violet }
+  syntax['CursorLine'] = { bg = colours.chineseBlack }
   syntax['Debug'] = { fg = colours.blacklight }
   syntax['Define'] = { fg = colours.snow }
   syntax['Delimiter'] = { fg = colours.gainsboro }
@@ -39,10 +40,10 @@ function M.load_syntax(colours)
   syntax['LineNR'] = { fg = colours.snow }
   syntax['Macro'] = { fg = colours.paleViolet }
   syntax['Normal'] = { fg = colours.gainsboro }
-  syntax['Number'] = { fg = colours.snow }
   syntax['NormalFloat'] = { fg = colours.gainsboro, bg = colours.night }
+  syntax['Number'] = { fg = colours.snow }
   syntax['Numeric'] = { fg = colours.snow }
-  syntax['Operator'] = { fg = colours.gainsboro }
+  syntax['Operator'] = { fg = colours.periwinkle }
   syntax['Pmenu'] = { fg = colours.gainsboro, bg = colours.night }
   syntax['PmenuSbar'] = { fg = colours.none, bg = colours.night }
   syntax['PmenuSel'] = { fg = colours.black, bg = colours.violet }
@@ -80,7 +81,7 @@ function M.load_syntax(colours)
   syntax['cTSInclude'] = syntax['Include']
   syntax['cType'] = syntax['Type']
   syntax['cTSType'] = syntax['Type']
-  syntax['cConstant'] = syntax['Constand']
+  syntax['cConstant'] = syntax['Constant']
 
   --Lua--
   syntax['luaParen'] = syntax['Bracket']
@@ -109,14 +110,9 @@ function M.load_syntax(colours)
   syntax['@function.builtin'] = syntax['Function']
   syntax['@function.call'] = syntax['Function']
   syntax['@constant.builtin'] = syntax['Constant']
-  syntax['@type.qualifier'] = syntax['Keyword']
   syntax['@type.builtin'] = syntax['Keyword']
-  syntax['@include'] = syntax['Keyword']
   syntax['@boolean'] = syntax['Boolean']
-
-  --C#--
-  syntax['@CSharpMemberAccess'] = { fg = colours.violet }
-  syntax['@CSharpConstructorAssignment'] = { fg = colours.violet }
+  syntax['@punctuation.bracket'] = syntax['Bracket']
 
   --Lualine--
   syntax['lualineActiveBuffer'] = { fg = colours.maastrichtBlue, bg = colours.jasmine }
@@ -125,7 +121,6 @@ function M.load_syntax(colours)
   syntax['netrwGray'] = { bg = colours.night }
   syntax['Folded'] = { bg = colours.night }
   syntax['FoldColumn'] = { bg = colours.night }
-  syntax['CursorLine'] = { bg = colours.night }
 
   --Lsp--
   syntax['@lsp.type.variable'] = { fg = colours.winter }
@@ -138,7 +133,7 @@ function M.load_syntax(colours)
 
   --Telescope--
   syntax['TelescopePromptCounter'] = { fg = colours.snow }
-  syntax['TelescopeSelection'] = { bg = colours.snowIce }
+  syntax['TelescopeSelection'] = { bg = colours.chineseBlack }
   syntax['TelescopeNormal'] = { fg = colours.gainsboro, bg = colours.night }
   syntax['TelescopeMatching'] = { fg = colours.sunny }
   syntax['TelescopePreviewExecute'] = { fg = colours.magenta }
@@ -158,8 +153,58 @@ function M.load_syntax(colours)
   syntax['Changed'] = { fg = colours.jasmine }
   syntax['Removed'] = { fg = colours.magenta }
 
+  --Zsh--
+  syntax['zshVariable'] = { fg = colours.darkSkyBlue }
+  syntax['zshVariableDef'] = syntax['zshVariable']
+  syntax['zshFunction'] = syntax['Function']
+
+  --Rust--
+  syntax['@RustFieldExpression'] = { fg = colours.violet }
+
+  --Ibl--
+  syntax['IblIndent'] = { fg = colours.chineseBlack }
+  syntax['IblScope'] = { fg = colours.purpleSky }
+
   --Dap--
-  syntax['NvimDapVirtualText'] = { fg = colours.night }
+  syntax['DapUINormal'] = { fg = colours.periwinkle }
+  syntax['DapUIVariable'] = { fg = colours.periwinkle }
+  syntax['DapUIScope'] = { fg = colours.frenchSkyBlue }
+  syntax['DapUIType'] = { fg = colours.periwinkle }
+  syntax['DapUIValue'] = { fg = colours.periwinkle }
+  syntax['DapUIModifiedValue'] = { fg = colours.periwinkle }
+  syntax['DapUIDecoration'] = { fg = colours.periwinkle }
+  syntax['DapUIThread'] = { fg = colours.frenchSkyBlue }
+  syntax['DapUIStoppedThread'] = { fg = colours.periwinkle }
+  syntax['DapUIFrameName'] = { fg = colours.periwinkle }
+  syntax['DapUISource'] = { fg = colours.periwinkle }
+  syntax['DapUILineNumber'] = { fg = colours.snow }
+  syntax['DapUIFloatBorder'] = { fg = colours.periwinkle }
+  syntax['DapUIWatchesValue'] = { fg = colours.frenchSkyBlue }
+  syntax['DapUIWatchesEmpty'] = { fg = colours.periwinkle }
+  syntax['DapUIWatchesError'] = { fg = colours.imperialRed }
+  syntax['DapUIBreakpointsPath'] = { fg = colours.frenchSkyBlue }
+  syntax['DapUIBreakpointsInfo'] = { fg = colours.periwinkle }
+  syntax['DapUIBreakpointsCurrentLine'] = { fg = colours.periwinkle }
+  syntax['DapUIBreakpointsLine'] = { fg = colours.periwinkle }
+  syntax['DapUIBreakpointsDisabledLine'] = { fg = colours.periwinkle }
+  syntax['DapUICurrentFrameName'] = { fg = colours.frenchSkyBlue }
+  syntax['DapUIStepOver'] = { fg = colours.periwinkle }
+  syntax['DapUIStepInto'] = { fg = colours.periwinkle }
+  syntax['DapUIStepBack'] = { fg = colours.periwinkle }
+  syntax['DapUIStepOut'] = { fg = colours.periwinkle }
+  syntax['DapUIStop'] = { fg = colours.periwinkle }
+  syntax['DapUIPlayPause'] = { fg = colours.periwinkle }
+  syntax['DapUIRestart'] = { fg = colours.periwinkle }
+  syntax['DapUIUnavailable'] = { fg = colours.night }
+  syntax['DapUIWinSelect'] = { fg = colours.periwinkle }
+  syntax['DapUIPlayPauseNC'] = { fg = colours.periwinkle }
+  syntax['DapUIRestartNC'] = { fg = colours.periwinkle }
+  syntax['DapUIStopNC'] = { fg = colours.periwinkle }
+  syntax['DapUIUnavailableNC'] = { fg = colours.night }
+  syntax['DapUIStepOverNC'] = { fg = colours.periwinkle }
+  syntax['DapUIStepIntoNC'] = { fg = colours.periwinkle }
+  syntax['DapUIStepBackNC'] = { fg = colours.periwinkle }
+  syntax['DapUIStepOutNC'] = { fg = colours.periwinkle }
 
   for group, highlights in pairs(syntax) do
     utils.highlighter(group, highlights)
