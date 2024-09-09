@@ -32,11 +32,14 @@ return {
       type = 'executable',
       command = vim.fn.exepath('netcoredbg'),
       args = { '--interpreter=vscode' },
+      options = {
+        detached = false,
+      },
     }
 
     local function get_dll()
       return coroutine.create(function(dap_run_co)
-        local items = vim.fn.globpath(vim.fn.getcwd(), '**/bin/Debug/**/*.dll', false, 1)
+        local items = vim.fn.globpath(vim.fn.getcwd(), '**/bin/Debug/net8*/T*.MicroService*.dll', false, 1)
         local opts = {
           format_item = function(path)
             return vim.fn.fnamemodify(path, ':t')
@@ -55,14 +58,20 @@ return {
     end
 
     dap.configurations.cs = {
-      type = 'coreclr',
-      name = 'NetCoreDbg: Launch',
-      request = 'launch',
-      cwd = '${fileDirname}',
-      program = get_dll,
-      env = {
-        ASPNETCORE_ENVIRONMENT = 'Development',
-        ASPNETCORE_URLS = 'http://localhost:5050',
+      {
+        type = 'coreclr',
+        name = 'NetCoreDbg: Launch',
+        request = 'launch',
+        cwd = function()
+          return vim.fn.getcwd()
+        end,
+        program = get_dll(),
+        justMyCode = false,
+        stopAtEntry = false,
+        env = {
+          ASPNETCORE_ENVIRONMENT = 'Development',
+          ASPNETCORE_URLS = 'http://localhost:5050',
+        },
       },
     }
 
