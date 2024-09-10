@@ -48,3 +48,4 @@ vim.keymap.set('n', '<A-x>', '<cmd>bd<CR>', { desc = 'Buffer close', silent = tr
 
 -- Terminal
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('n', '<leader>vc', '<cmd>terminal<CR>', { desc = 'Open terminal' })

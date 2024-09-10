@@ -5,6 +5,7 @@ vim.g.loaded_ruby_provider = 0
 
 vim.opt.termguicolors = true
 vim.opt.background = 'dark'
+vim.opt.shell = 'pwsh'
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -57,6 +58,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
+})
+
+vim.api.nvim_create_autocmd('TermOpen', {
+  desc = 'Automatically enter terminal mode when a terminal opens',
+  group = vim.api.nvim_create_augroup('auto-terminal-mode', { clear = true }),
+  command = 'startinsert',
 })
 
 vim.api.nvim_create_autocmd('VimLeave', {

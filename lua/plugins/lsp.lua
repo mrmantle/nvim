@@ -98,7 +98,6 @@ return {
         'prettierd',
         'eslint_d',
         'netcoredbg',
-        'csharpier',
         'stylua',
       })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
