@@ -11,8 +11,8 @@ return {
             dotnet_show_name_completion_suggestions = true,
           },
           ['csharp|background_analysis'] = {
-            dotnet_analyzer_diagnostics_scope = 'fullSolution',
-            dotnet_compiler_diagnostics_scope = 'fullSolution',
+            dotnet_analyzer_diagnostics_scope = 'openFiles',
+            dotnet_compiler_diagnostics_scope = 'openFiles',
           },
           ['csharp|symbol_search'] = {
             dotnet_search_reference_assemblies = true,
