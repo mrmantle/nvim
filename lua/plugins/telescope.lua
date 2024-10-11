@@ -27,6 +27,7 @@ return {
           flex = { flip_columns = 150 },
           horizontal = {
             prompt_position = 'top',
+            preview_width = 0.5,
           },
           vertical = {
             mirror = true,
@@ -36,6 +37,15 @@ return {
         winblend = 12,
         color_devicons = false,
         sorting_strategy = 'ascending',
+        path_display = { truncate = 3 },
+        mappings = {
+          i = {
+            ['<C-o>'] = require('telescope.actions.layout').toggle_preview,
+          },
+          n = {
+            ['o'] = require('telescope.actions.layout').toggle_preview,
+          },
+        },
       },
       extensions = {
         file_browser = {
@@ -44,6 +54,7 @@ return {
           dir_icon = '',
           dir_icon_hl = 'Type',
           hijack_netrw = true,
+          respect_gitignore = false,
         },
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(dropdown_options()),
@@ -65,6 +76,7 @@ return {
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+    vim.keymap.set('n', '<leader>sm', builtin.marks, { desc = '[S]earch [M]arks' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set(
       'n',

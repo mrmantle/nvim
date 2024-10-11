@@ -25,9 +25,12 @@ return {
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
+          local lsp_references = function()
+            require('telescope.builtin').lsp_references({ fname_width = 120 })
+          end
 
+          map('gr', lsp_references, '[G]oto [R]eferences')
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
           map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
@@ -50,6 +53,14 @@ return {
               buffer = event.buf,
               group = highlight_augroup,
               callback = vim.lsp.buf.clear_references,
+            })
+
+            vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+              group = vim.api.nvim_create_augroup('lsp-codelens', { clear = true }),
+              buffer = event.buf,
+              callback = function(event2)
+                vim.lsp.codelens.refresh({ bufnr = event2.buf })
+              end,
             })
 
             vim.api.nvim_create_autocmd('LspDetach', {
