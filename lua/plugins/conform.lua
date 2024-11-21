@@ -29,6 +29,7 @@ return {
     end,
     formatters_by_ft = {
       css = { 'prettierd' },
+      json = { 'prettierd' },
       html = { 'prettierd' },
       typescript = { 'prettierd' },
       lua = { 'stylua' },
