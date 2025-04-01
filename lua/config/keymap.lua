@@ -24,8 +24,12 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostics
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Op[e]n diagnostics' })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [d]iagnostic' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [d]iagnostic' })
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = 'Go to previous [d]iagnostic' })
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = 'Go to next [d]iagnostic' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Navigation
@@ -49,3 +53,11 @@ vim.keymap.set('n', '<A-x>', '<cmd>bd<CR>', { desc = 'Buffer close', silent = tr
 -- Terminal
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('n', '<leader>vc', '<cmd>terminal<CR>', { desc = 'Open terminal' })
+
+-- Remove default lsp keybindings
+-- May look to slowly adopt these later
+vim.keymap.del('n', 'gri')
+vim.keymap.del('n', 'grr')
+vim.keymap.del('x', 'gra')
+vim.keymap.del('n', 'gra')
+vim.keymap.del('n', 'grn')
