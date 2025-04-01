@@ -44,6 +44,7 @@ vim.cmd('colorscheme rsharpr')
 vim.cmd('syntax on') -- Seems to trigger ftplugins so keep below vim.opt indents
 vim.api.nvim_set_hl(0, 'TabLine', { fg = '#ffffff', bg = '#2c3042', underline = false })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#ee82ee', bold = true })
+vim.api.nvim_set_hl(0, 'PmenuSel', { fg = '#000000', bg = '#ee82ee', reverse = false })
 
 -- Autocommands
 vim.api.nvim_create_autocmd('BufWritePre', {
