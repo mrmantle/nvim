@@ -13,7 +13,8 @@ return {
       { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
       { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
       { '<F4>', dap.step_back, desc = 'Debug: Step Back' },
-      { '<F8>', dap.disconnect, desc = 'Debug: Disconnect' },
+      { '<F8>', dap.stop, desc = 'Debug: Stop' },
+      { '<F9>', dap.disconnect, desc = 'Debug: Disconnect' },
       { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
       {
         '<leader>B',
@@ -37,24 +38,24 @@ return {
       },
     }
 
-    local function get_dll()
-      return coroutine.create(function(dap_run_co)
-        local items = vim.fn.globpath(vim.fn.getcwd(), '**/bin/Debug/net8*/T*.MicroService*.dll', false, 1)
-        local opts = {
-          format_item = function(path)
-            return vim.fn.fnamemodify(path, ':t')
-          end,
-        }
-        local function cont(choice)
-          if choice == nil then
-            return nil
-          else
-            coroutine.resume(dap_run_co, choice)
-          end
-        end
+    local function find_dll()
+      local root = vim.fs.find(function(name, path)
+        return name:match('%.csproj$') and path == vim.fn.getcwd()
+      end, { type = 'file' })[1]
+      if not root then
+        return nil
+      end
 
-        vim.ui.select(items, opts, cont)
-      end)
+      local project_dir = vim.fn.fnamemodify(root, ':h')
+      local dll_name = vim.fn.fnamemodify(root, ':t:r')
+
+      local dlls = vim.fs.find({ dll_name .. '.dll' }, {
+        path = project_dir .. '/bin/Debug/',
+        type = 'file',
+        limit = 10,
+      })
+
+      return dlls[#dlls]
     end
 
     dap.configurations.cs = {
@@ -65,7 +66,7 @@ return {
         cwd = function()
           return vim.fn.getcwd()
         end,
-        program = get_dll(),
+        program = find_dll,
         justMyCode = false,
         stopAtEntry = false,
         env = {
