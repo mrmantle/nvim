@@ -131,6 +131,12 @@ function M.load_syntax(colours)
   syntax['@tag'] = syntax['Tag']
   syntax['@tag.attribute'] = { fg = colours.violet }
 
+  --HtmlAngular--
+  syntax['htmlTag'] = { fg = colours.violet }
+  syntax['htmlEndTag'] = { fg = colours.violet }
+  syntax['htmlTagN'] = syntax['Tag']
+  syntax['htmlTagName'] = syntax['Tag']
+
   --Telescope--
   syntax['TelescopePromptCounter'] = { fg = colours.snow }
   syntax['TelescopeSelection'] = { bg = colours.chineseBlack }
