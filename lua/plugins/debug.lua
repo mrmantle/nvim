@@ -13,7 +13,7 @@ return {
       { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
       { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
       { '<F4>', dap.step_back, desc = 'Debug: Step Back' },
-      { '<F8>', dap.stop, desc = 'Debug: Stop' },
+      { '<F8>', dap.close, desc = 'Debug: Stop' },
       { '<F9>', dap.disconnect, desc = 'Debug: Disconnect' },
       { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
       {
