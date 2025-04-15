@@ -81,7 +81,11 @@ return {
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      local lspconfig = require('lspconfig')
       local servers = {
+        angularls = {
+          root_dir = lspconfig.util.root_pattern('angular.json', 'nx.json'),
+        },
         marksman = {},
         ts_ls = {},
         lua_ls = {
@@ -107,6 +111,7 @@ return {
       })
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        { 'angularls', version = '17.3.2' },
         'prettierd',
         'eslint_d',
         'netcoredbg',
