@@ -53,11 +53,3 @@ vim.keymap.set('n', '<A-x>', '<cmd>bd<CR>', { desc = 'Buffer close', silent = tr
 -- Terminal
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('n', '<leader>vc', '<cmd>terminal<CR>', { desc = 'Open terminal' })
-
--- Remove default lsp keybindings
--- May look to slowly adopt these later
-vim.keymap.del('n', 'gri')
-vim.keymap.del('n', 'grr')
-vim.keymap.del('x', 'gra')
-vim.keymap.del('n', 'gra')
-vim.keymap.del('n', 'grn')

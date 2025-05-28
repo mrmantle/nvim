@@ -1,51 +1,47 @@
 return {
-  'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  'saghen/blink.cmp',
+  event = 'VimEnter',
+  version = '1.*',
   dependencies = {
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-path',
-  },
-  config = function()
-    local cmp = require('cmp')
-    local luasnip = require('luasnip')
-    luasnip.config.setup({})
-
-    cmp.setup({
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      completion = { completeopt = 'menu,menuone,noinsert' },
-      mapping = cmp.mapping.preset.insert({
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-Space>'] = cmp.mapping.complete({}),
-        ['<C-l>'] = cmp.mapping(function()
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          end
-        end, { 'i', 's' }),
-        ['<C-h>'] = cmp.mapping(function()
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          end
-        end, { 'i', 's' }),
-      }),
-      sources = {
+    {
+      'L3MON4D3/LuaSnip',
+      version = '2.*',
+      build = 'make install_jsregexp',
+      dependencies = {
         {
-          name = 'lazydev',
-          group_index = 0,
+          'rafamadriz/friendly-snippets',
+          config = function()
+            require('luasnip.loaders.from_vscode').lazy_load()
+          end,
         },
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'path' },
       },
-    })
-  end,
+      opts = {},
+    },
+    'folke/lazydev.nvim',
+  },
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
+  opts = {
+    keymap = {
+      preset = 'default',
+    },
+    appearance = {
+      nerd_font_variant = 'mono',
+    },
+    completion = {
+      documentation = { auto_show = false, auto_show_delay_ms = 500 },
+      menu = {
+        draw = { columns = { { 'label', 'label_description', gap = 1 }, { 'kind' } } },
+      },
+    },
+    sources = {
+      default = { 'lsp', 'path', 'snippets', 'lazydev', 'cmdline' },
+      providers = {
+        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+      },
+    },
+    snippets = { preset = 'luasnip' },
+    fuzzy = { implementation = 'prefer_rust_with_warning' },
+    signature = { enabled = true },
+  },
 }

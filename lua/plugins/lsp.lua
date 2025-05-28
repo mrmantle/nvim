@@ -12,10 +12,9 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      'mason-org/mason.nvim',
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -29,15 +28,15 @@ return {
             require('telescope.builtin').lsp_references({ fname_width = 120 })
           end
 
-          map('gr', lsp_references, '[G]oto [R]eferences')
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('grr', lsp_references, '[G]oto [R]eferences')
+          map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('grt', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('gO', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+          map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('gra', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+          map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
@@ -79,12 +78,17 @@ return {
         end,
       })
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-      local lspconfig = require('lspconfig')
       local servers = {
-        angularls = {
-          root_dir = lspconfig.util.root_pattern('angular.json', 'nx.json'),
+        angularls = {},
+        cssls = {
+          init_options = {
+            provideFormatter = false,
+          },
+        },
+        html = {
+          init_options = {
+            provideFormatter = false,
+          },
         },
         marksman = {},
         ts_ls = {},
@@ -101,7 +105,45 @@ return {
             },
           },
         },
+        roslyn = {
+          settings = {
+            ['csharp|completion'] = {
+              dotnet_provide_regex_completions = true,
+              dotnet_show_completion_items_from_unimported_namespaces = true,
+              dotnet_show_name_completion_suggestions = true,
+            },
+            ['csharp|background_analysis'] = {
+              dotnet_analyzer_diagnostics_scope = 'openFiles',
+              dotnet_compiler_diagnostics_scope = 'openFiles',
+            },
+            ['csharp|symbol_search'] = {
+              dotnet_search_reference_assemblies = true,
+            },
+            ['csharp|inlay_hints'] = {
+              csharp_enable_inlay_hints_for_implicit_object_creation = true,
+              csharp_enable_inlay_hints_for_implicit_variable_types = true,
+              csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+              csharp_enable_inlay_hints_for_types = true,
+              dotnet_enable_inlay_hints_for_indexer_parameters = true,
+              dotnet_enable_inlay_hints_for_literal_parameters = true,
+              dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+              dotnet_enable_inlay_hints_for_other_parameters = true,
+              dotnet_enable_inlay_hints_for_parameters = true,
+              dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+              dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+              dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+            },
+            ['csharp|code_lens'] = {
+              dotnet_enable_references_code_lens = true,
+              dotnet_enable_tests_code_lens = true,
+            },
+          },
+        },
       }
+
+      for server, config in pairs(servers) do
+        vim.lsp.config(server, config)
+      end
 
       require('mason').setup({
         registries = {
@@ -109,7 +151,9 @@ return {
           'github:Crashdummyy/mason-registry',
         },
       })
-      local ensure_installed = vim.tbl_keys(servers or {})
+      local ensure_installed = vim.tbl_filter(function(key)
+        return key ~= 'roslyn'
+      end, vim.tbl_keys(servers or {}))
       vim.list_extend(ensure_installed, {
         { 'angularls', version = '17.3.2' },
         'prettierd',
@@ -118,14 +162,10 @@ return {
         'stylua',
       })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+
       require('mason-lspconfig').setup({
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
+        ensure_installed = {},
+        automatic_enable = true,
       })
     end,
   },

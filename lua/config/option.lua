@@ -3,34 +3,36 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-vim.opt.termguicolors = true
-vim.opt.background = 'dark'
-vim.opt.shell = 'pwsh'
+vim.o.termguicolors = true
+vim.o.shell = 'pwsh'
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+vim.o.background = 'dark'
+vim.o.winborder = 'rounded'
 
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.o.splitright = true
+vim.o.splitbelow = true
 
-vim.opt.signcolumn = 'yes'
-vim.opt.timeoutlen = 300
-vim.opt.hlsearch = true
-vim.opt.showmode = false
-vim.opt.cursorline = true
-vim.opt.mouse = 'a'
-vim.opt.scrolloff = 10
+vim.o.list = true
+vim.o.listchars = 'tab:» ,trail:·,nbsp:␣'
 
-vim.opt.nu = true
-vim.opt.relativenumber = true
+vim.o.signcolumn = 'yes'
+vim.o.timeoutlen = 300
+vim.o.hlsearch = true
+vim.o.showmode = false
+vim.o.cursorline = true
+vim.o.mouse = 'a'
+vim.o.scrolloff = 5
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+vim.o.nu = true
+vim.o.relativenumber = true
+
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
 
 vim.diagnostic.config({
   virtual_text = false,
@@ -41,7 +43,7 @@ vim.diagnostic.config({
 
 -- Colours
 vim.cmd('colorscheme rsharpr')
-vim.cmd('syntax on') -- Seems to trigger ftplugins so keep below vim.opt indents
+vim.cmd('syntax on') -- Seems to trigger ftplugins so keep below vim.o indents
 vim.api.nvim_set_hl(0, 'TabLine', { fg = '#ffffff', bg = '#2c3042', underline = false })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#ee82ee', bold = true })
 vim.api.nvim_set_hl(0, 'PmenuSel', { fg = '#000000', bg = '#ee82ee', reverse = false })
@@ -71,6 +73,6 @@ vim.api.nvim_create_autocmd('VimLeave', {
   desc = 'Restore the cursor shape on exit',
   group = vim.api.nvim_create_augroup('restore-cursor', { clear = true }),
   callback = function()
-    vim.opt.guicursor = 'a:ver25'
+    vim.o.guicursor = 'a:ver25'
   end,
 })

@@ -22,7 +22,7 @@ function M.load_syntax(colours)
   syntax['Conditional'] = { fg = colours.darkSkyBlue }
   syntax['Constant'] = { fg = colours.violet }
   syntax['CursorLine'] = { bg = colours.chineseBlack }
-  syntax['Debug'] = { fg = colours.blacklight }
+  syntax['Debug'] = { fg = colours.mango }
   syntax['Define'] = { fg = colours.snow }
   syntax['Delimiter'] = { fg = colours.gainsboro }
   syntax['Directory'] = { fg = colours.darkSkyBlue }

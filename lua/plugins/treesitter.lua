@@ -10,6 +10,8 @@ return {
         'css',
         'c_sharp',
         'html',
+        'json',
+        'jsonc',
         'lua',
         'markdown',
         'markdown_inline',
