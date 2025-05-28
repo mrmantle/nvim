@@ -31,6 +31,7 @@ function M.load_syntax(colours)
   syntax['ErrorMsg'] = { fg = colours.imperialRed }
   syntax['Exception'] = { fg = colours.imperialRed }
   syntax['Float'] = { fg = colours.snow }
+  syntax['FloatBorder'] = { bg = colours.night, fg = colours.snow }
   syntax['Function'] = { fg = colours.cyan }
   syntax['Identifier'] = { fg = colours.darkSkyBlue }
   syntax['Ignore'] = { fg = colours.black }
@@ -140,6 +141,8 @@ function M.load_syntax(colours)
   syntax['htmlTagName'] = syntax['Tag']
 
   --Telescope--
+  syntax['TelescopeBorder'] = { bg = colours.night, fg = colours.snow }
+  syntax['TelescopePromptCounter'] = { fg = colours.snow }
   syntax['TelescopePromptCounter'] = { fg = colours.snow }
   syntax['TelescopeSelection'] = { bg = colours.chineseBlack }
   syntax['TelescopeNormal'] = { fg = colours.gainsboro, bg = colours.night }
@@ -213,6 +216,10 @@ function M.load_syntax(colours)
   syntax['DapUIStepIntoNC'] = { fg = colours.periwinkle }
   syntax['DapUIStepBackNC'] = { fg = colours.periwinkle }
   syntax['DapUIStepOutNC'] = { fg = colours.periwinkle }
+
+  --Blink--
+  syntax['BlinkCmpMenuBorder'] = syntax['FloatBorder']
+  syntax['BlinkCmpScrollBarThumb'] = { bg = colours.winter }
 
   for group, highlights in pairs(syntax) do
     utils.highlighter(group, highlights)
