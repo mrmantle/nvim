@@ -126,6 +126,8 @@ function M.load_syntax(colours)
   syntax['@lsp.type.variable'] = { fg = colours.winter }
   syntax['@lsp.type.namespace'] = syntax['Identifier']
   syntax['@lsp.type.macro'] = syntax['Macro']
+  syntax['LspCodeLens'] = { fg = colours.snowIce }
+  syntax['LspInlayHint'] = syntax['LspCodeLens']
 
   --Html--
   syntax['@tag'] = syntax['Tag']

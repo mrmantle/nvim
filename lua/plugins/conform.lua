@@ -29,6 +29,7 @@ return {
     end,
     formatters_by_ft = {
       htmlangular = { 'prettierd' },
+      htmldjango = { 'prettierd' },
       css = { 'prettierd' },
       json = { 'prettierd' },
       html = { 'prettierd' },
