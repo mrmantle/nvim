@@ -49,7 +49,9 @@ return {
       local project_dir = vim.fn.fnamemodify(root, ':h')
       local dll_name = vim.fn.fnamemodify(root, ':t:r')
 
-      local dlls = vim.fs.find({ dll_name .. '.dll' }, {
+      local dlls = vim.fs.find(function(name, path)
+        return name == dll_name .. '.dll' and not path:match('publish')
+      end, {
         path = project_dir .. '/bin/Debug/',
         type = 'file',
         limit = 10,
