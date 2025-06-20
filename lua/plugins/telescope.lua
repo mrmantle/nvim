@@ -19,6 +19,7 @@ return {
       }
     end
 
+    local actions = require('telescope.actions')
     require('telescope').setup({
       defaults = {
         layout_strategy = 'flex',
@@ -43,6 +44,15 @@ return {
           },
           n = {
             ['o'] = require('telescope.actions.layout').toggle_preview,
+          },
+        },
+      },
+      pickers = {
+        help_tags = {
+          mappings = {
+            i = {
+              ['<CR>'] = actions.select_vertical,
+            },
           },
         },
       },
