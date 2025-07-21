@@ -155,7 +155,7 @@ return {
         return key ~= 'roslyn'
       end, vim.tbl_keys(servers or {}))
       vim.list_extend(ensure_installed, {
-        { 'angularls', version = '17.3.2' },
+        'angularls',
         'prettierd',
         'eslint_d',
         'netcoredbg',
