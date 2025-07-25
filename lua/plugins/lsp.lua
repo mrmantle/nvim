@@ -79,7 +79,9 @@ return {
       })
 
       local servers = {
-        angularls = {},
+        angularls = {
+          filetypes = { 'htmlangular' },
+        },
         cssls = {
           init_options = {
             provideFormatter = false,
