@@ -9,6 +9,7 @@ local colours = {
   chineseBlack = { '#140027', 0 },
   cyan = { '#00ffff', 14 },
   darkCyan = { '#008b8b', 6 },
+  darkPurple = { '#2b193c', 0 },
   darkSkyBlue = { '#569cd6', 12 },
   fawn = { '#dea678', 3 },
   frenchSkyBlue = { '#80a0ff', 12 },

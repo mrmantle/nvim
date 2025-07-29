@@ -21,7 +21,7 @@ function M.load_syntax(colours)
   syntax['Comment'] = { fg = colours.darkCyan }
   syntax['Conditional'] = { fg = colours.darkSkyBlue }
   syntax['Constant'] = { fg = colours.violet }
-  syntax['CursorLine'] = { bg = colours.chineseBlack }
+  syntax['CursorLine'] = { bg = colours.darkPurple }
   syntax['Debug'] = { fg = colours.mango }
   syntax['Define'] = { fg = colours.snow }
   syntax['Delimiter'] = { fg = colours.gainsboro }
@@ -173,7 +173,7 @@ function M.load_syntax(colours)
   syntax['@RustFieldExpression'] = { fg = colours.violet }
 
   --Ibl--
-  syntax['IblIndent'] = { fg = colours.chineseBlack }
+  syntax['IblIndent'] = { fg = colours.darkPurple }
   syntax['IblScope'] = { fg = colours.purpleSky }
 
   --Dap--
