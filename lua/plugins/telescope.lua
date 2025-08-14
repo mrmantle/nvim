@@ -108,21 +108,5 @@ return {
     vim.keymap.set('n', '<leader>sn', function()
       builtin.find_files({ cwd = vim.fn.stdpath('config') })
     end, { desc = '[S]earch [N]eovim files' })
-
-    local telescope_border_fix_group = vim.api.nvim_create_augroup('telescope-border-fix', { clear = true })
-    vim.api.nvim_create_autocmd('User', {
-      group = telescope_border_fix_group,
-      pattern = 'TelescopeFindPre',
-      callback = function()
-        vim.opt_local.winborder = 'none'
-        vim.api.nvim_create_autocmd('WinLeave', {
-          group = telescope_border_fix_group,
-          once = true,
-          callback = function()
-            vim.opt_local.winborder = 'rounded'
-          end,
-        })
-      end,
-    })
   end,
 }
