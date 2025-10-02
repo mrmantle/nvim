@@ -18,6 +18,7 @@ require('lazy').setup({
   spec = 'plugins',
   change_detection = { notify = false },
   ui = {
+    border = 'rounded',
     icons = {
       cmd = ' ',
       config = ' ',
