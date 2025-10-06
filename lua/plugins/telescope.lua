@@ -20,6 +20,8 @@ return {
     end
 
     local actions = require('telescope.actions')
+    local fb_finders = require('telescope._extensions.file_browser.finders')
+
     require('telescope').setup({
       defaults = {
         layout_strategy = 'flex',
@@ -64,6 +66,16 @@ return {
           dir_icon_hl = 'Type',
           hijack_netrw = true,
           respect_gitignore = false,
+          browse_files = function(opts)
+            opts = opts or {}
+            opts.depth = 1
+            return fb_finders.browse_files(opts)
+          end,
+          browse_folders = function(opts)
+            opts = opts or {}
+            opts.depth = false
+            return fb_finders.browse_folders(opts)
+          end,
         },
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(dropdown_options()),
