@@ -161,6 +161,7 @@ return {
         'prettierd',
         'eslint_d',
         'netcoredbg',
+        'js-debug-adapter',
         'stylua',
       })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
