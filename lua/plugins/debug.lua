@@ -38,6 +38,19 @@ return {
       },
     }
 
+    dap.adapters['pwa-chrome'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = vim.fn.exepath('js-debug-adapter'),
+        args = { '${port}' },
+      },
+      options = {
+        detached = false,
+      },
+    }
+
     local function find_dll()
       local root = vim.fs.find(function(name, path)
         return name:match('%.csproj$') and path == vim.fn.getcwd()
@@ -75,6 +88,18 @@ return {
           ASPNETCORE_ENVIRONMENT = 'Development',
           ASPNETCORE_URLS = 'http://localhost:5050',
         },
+      },
+    }
+
+    dap.configurations.typescript = {
+      {
+        name = 'Attach to Chrome (js-debug)',
+        type = 'pwa-chrome',
+        request = 'attach',
+        sourceMaps = true,
+        port = 9345,
+        webRoot = '${workspaceFolder}',
+        url = 'http://localhost:4200/*',
       },
     }
 
