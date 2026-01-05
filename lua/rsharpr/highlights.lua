@@ -69,6 +69,7 @@ function M.load_syntax(colours)
   syntax['Type'] = { fg = colours.snow }
   syntax['Typedef'] = { fg = colours.snow }
   syntax['Visual'] = { bg = colours.night }
+  syntax['WinSeparator'] = { fg = colours.snow }
 
   --Nvim--
   syntax['NvimCurly'] = syntax['Bracket']

@@ -8,6 +8,7 @@ vim.o.shell = 'pwsh'
 
 vim.o.background = 'dark'
 vim.o.winborder = 'rounded'
+vim.o.laststatus = 3
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -23,6 +24,7 @@ vim.o.timeoutlen = 300
 vim.o.hlsearch = true
 vim.o.showmode = false
 vim.o.cursorline = true
+vim.o.cursorlineopt = 'number'
 vim.o.mouse = 'a'
 vim.o.scrolloff = 5
 
@@ -45,7 +47,7 @@ vim.diagnostic.config({
 vim.cmd('colorscheme rsharpr')
 vim.cmd('syntax on') -- Seems to trigger ftplugins so keep below vim.o indents
 vim.api.nvim_set_hl(0, 'TabLine', { fg = '#ffffff', bg = '#2c3042', underline = false })
-vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#ee82ee', bold = true })
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#000000', bg = '#add8e6', bold = true })
 vim.api.nvim_set_hl(0, 'PmenuSel', { fg = '#000000', bg = '#ee82ee', reverse = false })
 
 -- Autocommands
@@ -67,6 +69,23 @@ vim.api.nvim_create_autocmd('TermOpen', {
   desc = 'Automatically enter terminal mode when a terminal opens',
   group = vim.api.nvim_create_augroup('auto-terminal-mode', { clear = true }),
   command = 'startinsert',
+})
+
+local cursorline_group = vim.api.nvim_create_augroup('cursor-line', { clear = true })
+vim.api.nvim_create_autocmd('WinEnter', {
+  desc = 'Set cursor line on window enter',
+  group = cursorline_group,
+  callback = function()
+    vim.wo.cursorline = true
+  end,
+})
+
+vim.api.nvim_create_autocmd('WinLeave', {
+  desc = 'Unset cursor line on window leave',
+  group = cursorline_group,
+  callback = function()
+    vim.wo.cursorline = false
+  end,
 })
 
 vim.api.nvim_create_autocmd('VimLeave', {
