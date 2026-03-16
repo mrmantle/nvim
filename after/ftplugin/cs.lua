@@ -1,1 +1,1 @@
-vim.opt_local.cinoptions = '(1s,J1'
+vim.opt_local.cinoptions = "(1s,J1"

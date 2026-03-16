@@ -1,50 +1,50 @@
 return {
-  'mfussenegger/nvim-dap',
+  "mfussenegger/nvim-dap",
   dependencies = {
-    'rcarriga/nvim-dap-ui',
-    'nvim-neotest/nvim-nio',
+    "rcarriga/nvim-dap-ui",
+    "nvim-neotest/nvim-nio",
   },
   keys = function(_, keys)
-    local dap = require('dap')
-    local dapui = require('dapui')
+    local dap = require("dap")
+    local dapui = require("dapui")
     return {
-      { '<F5>', dap.continue, desc = 'Debug: Start/Continue' },
-      { '<F1>', dap.step_into, desc = 'Debug: Step Into' },
-      { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
-      { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
-      { '<F4>', dap.step_back, desc = 'Debug: Step Back' },
-      { '<F8>', dap.close, desc = 'Debug: Stop' },
-      { '<F9>', dap.disconnect, desc = 'Debug: Disconnect' },
-      { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
+      { "<F5>", dap.continue, desc = "Debug: Start/Continue" },
+      { "<F1>", dap.step_into, desc = "Debug: Step Into" },
+      { "<F2>", dap.step_over, desc = "Debug: Step Over" },
+      { "<F3>", dap.step_out, desc = "Debug: Step Out" },
+      { "<F4>", dap.step_back, desc = "Debug: Step Back" },
+      { "<F8>", dap.close, desc = "Debug: Stop" },
+      { "<F9>", dap.disconnect, desc = "Debug: Disconnect" },
+      { "<leader>b", dap.toggle_breakpoint, desc = "Debug: Toggle Breakpoint" },
       {
-        '<leader>B',
+        "<leader>B",
         function()
-          dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+          dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
         end,
-        desc = 'Debug: Set Breakpoint',
+        desc = "Debug: Set Breakpoint",
       },
-      { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
+      { "<F7>", dapui.toggle, desc = "Debug: See last session result." },
       unpack(keys),
     }
   end,
   config = function()
-    local dap = require('dap')
+    local dap = require("dap")
     dap.adapters.coreclr = {
-      type = 'executable',
-      command = vim.fn.exepath('netcoredbg'),
-      args = { '--interpreter=vscode' },
+      type = "executable",
+      command = vim.fn.exepath("netcoredbg"),
+      args = { "--interpreter=vscode" },
       options = {
         detached = false,
       },
     }
 
-    dap.adapters['pwa-chrome'] = {
-      type = 'server',
-      host = 'localhost',
-      port = '${port}',
+    dap.adapters["pwa-chrome"] = {
+      type = "server",
+      host = "localhost",
+      port = "${port}",
       executable = {
-        command = vim.fn.exepath('js-debug-adapter'),
-        args = { '${port}' },
+        command = vim.fn.exepath("js-debug-adapter"),
+        args = { "${port}" },
       },
       options = {
         detached = false,
@@ -53,20 +53,20 @@ return {
 
     local function find_dll()
       local root = vim.fs.find(function(name, path)
-        return name:match('%.csproj$') and path == vim.fn.getcwd()
-      end, { type = 'file' })[1]
+        return name:match("%.csproj$") and path == vim.fn.getcwd()
+      end, { type = "file" })[1]
       if not root then
         return nil
       end
 
-      local project_dir = vim.fn.fnamemodify(root, ':h')
-      local dll_name = vim.fn.fnamemodify(root, ':t:r')
+      local project_dir = vim.fn.fnamemodify(root, ":h")
+      local dll_name = vim.fn.fnamemodify(root, ":t:r")
 
       local dlls = vim.fs.find(function(name, path)
-        return name == dll_name .. '.dll' and not path:match('publish')
+        return name == dll_name .. ".dll" and not path:match("publish")
       end, {
-        path = project_dir .. '/bin/Debug/',
-        type = 'file',
+        path = project_dir .. "/bin/Debug/",
+        type = "file",
         limit = 10,
       })
 
@@ -75,9 +75,9 @@ return {
 
     dap.configurations.cs = {
       {
-        type = 'coreclr',
-        name = 'NetCoreDbg: Launch',
-        request = 'launch',
+        type = "coreclr",
+        name = "NetCoreDbg: Launch",
+        request = "launch",
         cwd = function()
           return vim.fn.getcwd()
         end,
@@ -85,80 +85,80 @@ return {
         justMyCode = false,
         stopAtEntry = false,
         env = {
-          ASPNETCORE_ENVIRONMENT = 'Development',
-          ASPNETCORE_URLS = 'http://localhost:5050',
+          ASPNETCORE_ENVIRONMENT = "Development",
+          ASPNETCORE_URLS = "http://localhost:5050",
         },
       },
     }
 
     dap.configurations.typescript = {
       {
-        name = 'Attach to Chrome (js-debug)',
-        type = 'pwa-chrome',
-        request = 'attach',
+        name = "Attach to Chrome (js-debug)",
+        type = "pwa-chrome",
+        request = "attach",
         sourceMaps = true,
         port = 9345,
-        webRoot = '${workspaceFolder}',
-        url = 'http://localhost:4200/*',
+        webRoot = "${workspaceFolder}",
+        url = "http://localhost:4200/*",
       },
     }
 
-    local dapui = require('dapui')
+    local dapui = require("dapui")
     dapui.setup({
       expand_lines = false,
-      icons = { expanded = '', collapsed = '', current_frame = '' },
+      icons = { expanded = "", collapsed = "", current_frame = "" },
       controls = {
         icons = {
-          pause = '',
-          play = '',
-          step_into = '',
-          step_over = '',
-          step_out = '',
-          step_back = '',
-          run_last = '',
-          terminate = '',
-          disconnect = '',
+          pause = "",
+          play = "",
+          step_into = "",
+          step_over = "",
+          step_out = "",
+          step_back = "",
+          run_last = "",
+          terminate = "",
+          disconnect = "",
         },
       },
       layouts = {
         {
           elements = {
             {
-              id = 'scopes',
+              id = "scopes",
               size = 0.25,
             },
             {
-              id = 'breakpoints',
+              id = "breakpoints",
               size = 0.25,
             },
             {
-              id = 'stacks',
+              id = "stacks",
               size = 0.25,
             },
             {
-              id = 'watches',
+              id = "watches",
               size = 0.25,
             },
           },
-          position = 'right',
+          position = "right",
           size = 85,
         },
         {
           elements = {
             {
-              id = 'repl',
+              id = "repl",
               size = 1,
             },
           },
-          position = 'bottom',
+          position = "bottom",
           size = 25,
         },
       },
     })
 
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
-    dap.listeners.after.disconnect['dapui_config'] = dapui.close
+    dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+    dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+    dap.listeners.before.event_exited["dapui_config"] = dapui.close
+    dap.listeners.after.disconnect["dapui_config"] = dapui.close
   end,
 }
