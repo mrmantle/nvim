@@ -5,6 +5,7 @@ vim.g.loaded_ruby_provider = 0
 vim.g.terminal_color_8 = "#808080"
 
 vim.o.termguicolors = true
+vim.o.shell = "pwsh"
 
 vim.o.background = "dark"
 vim.o.winborder = "rounded"
