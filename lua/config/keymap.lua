@@ -57,6 +57,15 @@ vim.keymap.set("n", "<leader>vc", "<cmd>terminal<CR>", { desc = "Open terminal" 
 -- Treesitter
 vim.keymap.set("n", "<leader>hi", vim.cmd.Inspect, { silent = true, desc = "Show [hi]light under cursor" })
 
+-- Git Diff
+vim.keymap.set("n", "<leader>gl", function()
+  vim.cmd.diffget("LOCAL")
+end, { desc = "Diff [G]et [L]ocal" })
+
+vim.keymap.set("n", "<leader>gr", function()
+  vim.cmd.diffget("REMOTE")
+end, { desc = "Diff [G]et [R]emote" })
+
 -- Windows Terminal
 -- New tab
 local function wtnt(...)

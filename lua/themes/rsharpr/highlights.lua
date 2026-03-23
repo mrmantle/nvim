@@ -34,6 +34,8 @@ function M.load_syntax(colours)
   syntax["Exception"] = { fg = colours.fieryRose }
   syntax["Float"] = { fg = colours.snow }
   syntax["FloatBorder"] = { bg = colours.matteBlack, fg = colours.snow }
+  syntax["FoldColumn"] = { fg = colours.snowIce }
+  syntax["Folded"] = { fg = colours.snowIce }
   syntax["Function"] = { fg = colours.cyan }
   syntax["Identifier"] = { fg = colours.azul }
   syntax["Ignore"] = { fg = colours.black }
@@ -124,8 +126,6 @@ function M.load_syntax(colours)
 
   --Netrw--
   syntax["netrwGray"] = { bg = colours.matteBlack }
-  syntax["Folded"] = { bg = colours.night }
-  syntax["FoldColumn"] = { bg = colours.night }
 
   --Lsp--
   syntax["@lsp.type.variable"] = { fg = colours.winter }
@@ -155,13 +155,13 @@ function M.load_syntax(colours)
   syntax["TelescopePromptPrefix"] = { fg = colours.snow }
 
   --Quickfix--
-  syntax["QuickFixLine"] = { fg = colours.black, bg = colours.violet }
+  syntax["QuickFixLine"] = { bg = colours.night }
 
   --Diff--
-  syntax["DiffAdd"] = { fg = colours.azul, bg = colours.night }
-  syntax["DiffChange"] = { fg = colours.jasmine, bg = colours.night }
-  syntax["DiffDelete"] = { fg = colours.fieryRose, bg = colours.night }
-  syntax["DiffText"] = { bg = colours.night }
+  syntax["DiffAdd"] = { fg = colours.azul, bg = colours.matteBlack }
+  syntax["DiffChange"] = { fg = colours.jasmine, bg = colours.matteBlack }
+  syntax["DiffDelete"] = { fg = colours.fieryRose, bg = colours.matteBlack }
+  syntax["DiffText"] = { bg = colours.matteBlack }
 
   --Git--
   syntax["Added"] = { fg = colours.azul }
