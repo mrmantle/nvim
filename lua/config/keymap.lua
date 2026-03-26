@@ -140,7 +140,7 @@ vim.keymap.set("n", "<leader>zusp", function()
   nx_serve("student-portal")
 end, { silent = true, desc = "Windows terminal nx serve portal" })
 
-vim.keymap.set("n", "<leader>zue", function()
+vim.keymap.set("n", "<leader>zues", function()
   wtnp(
     "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
     "--title",
@@ -150,9 +150,9 @@ vim.keymap.set("n", "<leader>zue", function()
     "-Command",
     "npm run extract-i18n:srs"
   )
-end, { silent = true, desc = "Windows terminal i18n extract" })
+end, { silent = true, desc = "Windows terminal i18n extract srs" })
 
-vim.keymap.set("n", "<leader>zut", function()
+vim.keymap.set("n", "<leader>zuts", function()
   local apiKey = vim.env.TranslatorKey
   wtnp(
     "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
@@ -163,7 +163,32 @@ vim.keymap.set("n", "<leader>zut", function()
     "-Command",
     "npm run translate-i18n:srs -- --azureTranslator=mrmtranslator --apiKey=" .. apiKey
   )
-end, { silent = true, desc = "Windows terminal i18n translate" })
+end, { silent = true, desc = "Windows terminal i18n translate srs" })
+
+vim.keymap.set("n", "<leader>zuep", function()
+  wtnp(
+    "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
+    "--title",
+    "i18n extract",
+    "pwsh.exe",
+    "-NoExit",
+    "-Command",
+    "npm run extract-i18n:student-portal"
+  )
+end, { silent = true, desc = "Windows terminal i18n extract portal" })
+
+vim.keymap.set("n", "<leader>zutp", function()
+  local apiKey = vim.env.TranslatorKey
+  wtnp(
+    "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
+    "--title",
+    "i18n translate",
+    "pwsh.exe",
+    "-NoExit",
+    "-Command",
+    "npm run translate-i18n:student-portal -- --azureTranslator=mrmtranslator --apiKey=" .. apiKey
+  )
+end, { silent = true, desc = "Windows terminal i18n translate portal" })
 
 vim.keymap.set("n", "<leader>zulc", function()
   enable_local_ui("enable-local-ui.ps1", "caltech")
