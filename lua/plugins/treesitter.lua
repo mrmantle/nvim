@@ -12,6 +12,7 @@ return {
         "html",
         "json",
         "jsonc",
+        "kdl",
         "lua",
         "markdown",
         "markdown_inline",

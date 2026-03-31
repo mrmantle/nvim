@@ -66,43 +66,24 @@ vim.keymap.set("n", "<leader>gr", function()
   vim.cmd.diffget("REMOTE")
 end, { desc = "Diff [G]et [R]emote" })
 
--- Windows Terminal
--- New tab
-local function wtnt(...)
-  vim.system({
-    "wt",
-    "-w",
-    "0",
-    "nt",
-    "-p",
-    "PS7",
-    "-d",
-    ...,
-  })
+-- Zellij
+local function zrun(cwd, name, ...)
+  if vim.env.ZELLIJ then
+    vim.system({ "zellij", "run", "--cwd", cwd, "-n", name, "-d", "right", "--", ... })
+  end
 end
 
--- New split pane
-local function wtnp(...)
-  vim.system({
-    "wt",
-    "-w",
-    "0",
-    "sp",
-    "-V",
-    "-p",
-    "PS7",
-    "-d",
-    ...,
-  })
+local function ztab(cwd, name, ...)
+  if vim.env.ZELLIJ then
+    vim.system({ "zellij", "action", "new-tab", "--cwd", cwd, "-n", name, "--", ... })
+  end
 end
 
-local function enable_local_ui(script, tenant)
-  wtnp(
+local function z_enable_local_ui(script, tenant)
+  zrun(
     "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "--title",
     "enable local",
     "pwsh.exe",
-    "-NoExit",
     "-File",
     ".\\" .. script,
     "-updateEnvironmentFile",
@@ -120,11 +101,10 @@ local function enable_local_ui(script, tenant)
   )
 end
 
-local function nx_serve(app)
-  wtnt(
+local function z_nx_serve(app)
+  ztab(
     "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "--title",
-    "nx serve ",
+    "nx serve",
     "pwsh.exe",
     "-NoExit",
     "-Command",
@@ -133,75 +113,67 @@ local function nx_serve(app)
 end
 
 vim.keymap.set("n", "<leader>zusu", function()
-  nx_serve("srs")
-end, { silent = true, desc = "Windows terminal nx serve" })
+  z_nx_serve("srs")
+end, { silent = true, desc = "Zellij nx serve srs" })
 
 vim.keymap.set("n", "<leader>zusp", function()
-  nx_serve("student-portal")
-end, { silent = true, desc = "Windows terminal nx serve portal" })
+  z_nx_serve("student-portal")
+end, { silent = true, desc = "Zellij nx serve portal" })
 
 vim.keymap.set("n", "<leader>zues", function()
-  wtnp(
+  zrun(
     "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "--title",
     "i18n extract",
     "pwsh.exe",
-    "-NoExit",
     "-Command",
     "npm run extract-i18n:srs"
   )
-end, { silent = true, desc = "Windows terminal i18n extract srs" })
+end, { silent = true, desc = "Zellij i18n extract srs" })
 
 vim.keymap.set("n", "<leader>zuts", function()
   local apiKey = vim.env.TranslatorKey
-  wtnp(
+  zrun(
     "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "--title",
     "i18n translate",
     "pwsh.exe",
-    "-NoExit",
     "-Command",
     "npm run translate-i18n:srs -- --azureTranslator=mrmtranslator --apiKey=" .. apiKey
   )
-end, { silent = true, desc = "Windows terminal i18n translate srs" })
+end, { silent = true, desc = "Zellij i18n translate srs" })
 
 vim.keymap.set("n", "<leader>zuep", function()
-  wtnp(
+  zrun(
     "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "--title",
     "i18n extract",
     "pwsh.exe",
-    "-NoExit",
     "-Command",
     "npm run extract-i18n:student-portal"
   )
-end, { silent = true, desc = "Windows terminal i18n extract portal" })
+end, { silent = true, desc = "Zellij i18n extract portal" })
 
 vim.keymap.set("n", "<leader>zutp", function()
   local apiKey = vim.env.TranslatorKey
-  wtnp(
+  zrun(
     "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "--title",
     "i18n translate",
     "pwsh.exe",
-    "-NoExit",
     "-Command",
     "npm run translate-i18n:student-portal -- --azureTranslator=mrmtranslator --apiKey=" .. apiKey
   )
-end, { silent = true, desc = "Windows terminal i18n translate portal" })
+end, { silent = true, desc = "Zellij i18n translate portal" })
 
 vim.keymap.set("n", "<leader>zulc", function()
-  enable_local_ui("enable-local-ui.ps1", "caltech")
-end, { silent = true, desc = "Windows terminal enable local UI caltech" })
+  z_enable_local_ui("enable-local-ui.ps1", "caltech")
+end, { silent = true, desc = "Zellij enable local UI caltech" })
 
 vim.keymap.set("n", "<leader>zult", function()
-  enable_local_ui("enable-local-ui.ps1", "tribal")
-end, { silent = true, desc = "Windows terminal enable local UI tribal" })
+  z_enable_local_ui("enable-local-ui.ps1", "tribal")
+end, { silent = true, desc = "Zellij enable local UI tribal" })
 
 vim.keymap.set("n", "<leader>zulpc", function()
-  enable_local_ui("enable-local-ui-portal.ps1", "caltech")
-end, { silent = true, desc = "Windows terminal enable local UI portal caltech" })
+  z_enable_local_ui("enable-local-ui-portal.ps1", "caltech")
+end, { silent = true, desc = "Zellij enable local UI portal caltech" })
 
 vim.keymap.set("n", "<leader>zulpt", function()
-  enable_local_ui("enable-local-ui-portal.ps1", "tribal")
-end, { silent = true, desc = "Windows terminal enable local UI portal tribal" })
+  z_enable_local_ui("enable-local-ui-portal.ps1", "tribal")
+end, { silent = true, desc = "Zellij enable local UI portal tribal" })
