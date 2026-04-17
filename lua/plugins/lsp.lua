@@ -52,14 +52,6 @@ return {
               callback = vim.lsp.buf.clear_references,
             })
 
-            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-              group = vim.api.nvim_create_augroup("lsp-codelens", { clear = true }),
-              buffer = event.buf,
-              callback = function(event2)
-                vim.lsp.codelens.refresh({ bufnr = event2.buf })
-              end,
-            })
-
             vim.api.nvim_create_autocmd("LspDetach", {
               group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
               callback = function(event2)

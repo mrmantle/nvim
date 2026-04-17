@@ -85,11 +85,3 @@ vim.api.nvim_create_autocmd("WinLeave", {
     vim.wo.cursorline = false
   end,
 })
-
-vim.api.nvim_create_autocmd("VimLeave", {
-  desc = "Restore the cursor shape on exit",
-  group = vim.api.nvim_create_augroup("restore-cursor", { clear = true }),
-  callback = function()
-    vim.o.guicursor = "a:ver25"
-  end,
-})

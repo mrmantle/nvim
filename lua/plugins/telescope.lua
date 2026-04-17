@@ -45,9 +45,11 @@ return {
         mappings = {
           i = {
             ["<C-o>"] = layout_actions.toggle_preview,
+            ["<C-h>"] = "which_key",
           },
           n = {
             ["o"] = layout_actions.toggle_preview,
+            ["h>"] = "which_key",
           },
         },
       },

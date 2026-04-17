@@ -74,6 +74,8 @@ function M.load_syntax(colours)
   syntax["Type"] = { fg = colours.snow }
   syntax["Typedef"] = { fg = colours.snow }
   syntax["Visual"] = { bg = colours.night }
+  syntax["WinBar"] = { bg = colours.black, fg = colours.periwinkle, bold = true }
+  syntax["WinBarNC"] = { bg = colours.black, fg = colours.periwinkle, bold = true }
   syntax["WinSeparator"] = { fg = colours.snow }
 
   --Nvim--
@@ -158,10 +160,10 @@ function M.load_syntax(colours)
   syntax["QuickFixLine"] = { bg = colours.night }
 
   --Diff--
-  syntax["DiffAdd"] = { fg = colours.azul, bg = colours.matteBlack }
-  syntax["DiffChange"] = { fg = colours.jasmine, bg = colours.matteBlack }
-  syntax["DiffDelete"] = { fg = colours.fieryRose, bg = colours.matteBlack }
-  syntax["DiffText"] = { bg = colours.matteBlack }
+  syntax["DiffAdd"] = { fg = colours.azul, bg = colours.grey }
+  syntax["DiffChange"] = { fg = colours.jasmine, bg = colours.grey }
+  syntax["DiffDelete"] = { fg = colours.fieryRose, bg = colours.grey }
+  syntax["DiffText"] = { bg = colours.grey }
 
   --Git--
   syntax["Added"] = { fg = colours.azul }
@@ -182,6 +184,7 @@ function M.load_syntax(colours)
 
   --Dap--
   syntax["DapUINormal"] = { fg = colours.periwinkle }
+  syntax["DapUINormalNC"] = { bg = colours.black, fg = colours.periwinkle }
   syntax["DapUIVariable"] = { fg = colours.periwinkle }
   syntax["DapUIScope"] = { fg = colours.frenchSkyBlue }
   syntax["DapUIType"] = { fg = colours.periwinkle }

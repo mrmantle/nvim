@@ -177,3 +177,11 @@ end, { silent = true, desc = "Zellij enable local UI portal caltech" })
 vim.keymap.set("n", "<leader>zulpt", function()
   z_enable_local_ui("enable-local-ui-portal.ps1", "tribal")
 end, { silent = true, desc = "Zellij enable local UI portal tribal" })
+
+vim.keymap.set("n", "<leader>zdb", function()
+  zrun(vim.uv.cwd(), "dotnet build", "pwsh.exe", "-Command", "dotnet build")
+end, { silent = true, desc = "Zellij dotnet build" })
+
+vim.keymap.set("n", "<leader>zdt", function()
+  zrun(vim.uv.cwd(), "dotnet test", "pwsh.exe", "-Command", "dotnet test")
+end, { silent = true, desc = "Zellij dotnet test" })
