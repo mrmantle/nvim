@@ -160,10 +160,10 @@ function M.load_syntax(colours)
   syntax["QuickFixLine"] = { bg = colours.night }
 
   --Diff--
-  syntax["DiffAdd"] = { fg = colours.azul, bg = colours.grey }
-  syntax["DiffChange"] = { fg = colours.jasmine, bg = colours.grey }
-  syntax["DiffDelete"] = { fg = colours.fieryRose, bg = colours.grey }
-  syntax["DiffText"] = { bg = colours.grey }
+  syntax["DiffAdd"] = { bg = colours.maastrichtBlue }
+  syntax["DiffChange"] = { bg = colours.darkUmber }
+  syntax["DiffDelete"] = { bg = colours.antiqueRuby }
+  syntax["DiffText"] = { bg = colours.umber, bold = true }
 
   --Git--
   syntax["Added"] = { fg = colours.azul }

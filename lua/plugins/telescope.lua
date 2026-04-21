@@ -105,6 +105,7 @@ return {
     vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set("n", "<leader>sm", builtin.marks, { desc = "[S]earch [M]arks" })
     vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+    vim.keymap.set("n", "<leader>sc", builtin.git_status, { desc = "[S]earch Git [C]hanges (git status)" })
     vim.keymap.set(
       "n",
       "<leader>se",

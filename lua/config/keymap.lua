@@ -185,3 +185,49 @@ end, { silent = true, desc = "Zellij dotnet build" })
 vim.keymap.set("n", "<leader>zdt", function()
   zrun(vim.uv.cwd(), "dotnet test", "pwsh.exe", "-Command", "dotnet test")
 end, { silent = true, desc = "Zellij dotnet test" })
+
+-- Claude
+local claude_pane_id
+local function zellij_claude_send(text)
+  if not vim.env.ZELLIJ or not claude_pane_id then
+    vim.notify("No Claude pane open", vim.log.levels.WARN, { title = "Zellij" })
+    return
+  end
+  vim.system({ "zellij", "action", "write-chars", "--pane-id", claude_pane_id, text })
+  vim.system({ "zellij", "action", "send-keys", "--pane-id", claude_pane_id, "Enter" })
+end
+
+vim.keymap.set("n", "<leader>zcn", function()
+  if not vim.env.ZELLIJ then
+    return
+  end
+  vim.system(
+    {
+      "zellij",
+      "action",
+      "new-pane",
+      "--cwd",
+      vim.uv.cwd(),
+      "-n",
+      "claude",
+      "-d",
+      "right",
+      "--",
+      "pwsh.exe",
+      "-NoExit",
+      "-Command",
+      "claude",
+    },
+    {},
+    vim.schedule_wrap(function(result)
+      if result.code == 0 then
+        claude_pane_id = vim.trim(result.stdout or "")
+        vim.notify("Claude pane: " .. claude_pane_id, vim.log.levels.INFO, { title = "Zellij" })
+      end
+    end)
+  )
+end, { silent = true, desc = "Zellij claude new" })
+
+vim.keymap.set("n", "<leader>zcf", function()
+  zellij_claude_send("@" .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.") .. " ")
+end, { silent = true, desc = "Zellij claude add current file" })

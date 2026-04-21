@@ -3,11 +3,13 @@
 -- Colours are based on the JetBrains resharper colour scheme.
 return {
   none = { "none", "none" },
+  antiqueRuby = { "#4d1a23", 1 },
   azul = { "#569cd6", 12 },
   black = { "#121212", 0 },
   cyan = { "#66ffff", 14 },
   darkCyan = { "#008b8b", 6 },
   darkPurple = { "#3c2e4a", 5 },
+  darkUmber = { "#4d4127", 3 },
   drover = { "#fffdad", 11 },
   fieryRose = { "#ff5874", 9 },
   frenchSkyBlue = { "#80a0ff", 12 },
@@ -22,6 +24,7 @@ return {
   snow = { "#add8e6", 15 },
   snowIce = { "#45565c", 4 },
   tumbleweed = { "#d69d85", 3 },
+  umber = { "#806c41", 3 },
   violet = { "#ee82ee", 13 },
   vividLavender = { "#be7cff", 5 },
   white = { "#ffffff", 15 },
