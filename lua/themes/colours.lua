@@ -24,7 +24,7 @@ return {
   snow = { "#add8e6", 15 },
   snowIce = { "#45565c", 4 },
   tumbleweed = { "#d69d85", 3 },
-  umber = { "#4D4127", 3 },
+  umber = { "#646011", 3 },
   violet = { "#ee82ee", 13 },
   vividLavender = { "#be7cff", 5 },
   white = { "#ffffff", 15 },
