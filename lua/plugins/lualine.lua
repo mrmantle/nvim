@@ -19,6 +19,8 @@ return {
             "diff",
             diff_color = {
               added = "LuaLineDiffAdd",
+              modified = "LuaLineDiffChange",
+              removed = "LuaLineDiffRemove",
             },
           },
           { "diagnostics", sources = { "nvim_diagnostic", "nvim_lsp" } },

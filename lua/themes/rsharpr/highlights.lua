@@ -125,6 +125,8 @@ function M.load_syntax(colours)
 
   --Lualine--
   syntax["LualineDiffAdd"] = { fg = colours.azul, bg = colours.grey }
+  syntax["LualineDiffChange"] = { fg = colours.jasmine, bg = colours.grey }
+  syntax["LualineDiffRemove"] = { fg = colours.fieryRose, bg = colours.grey }
 
   --Netrw--
   syntax["netrwGray"] = { bg = colours.matteBlack }
