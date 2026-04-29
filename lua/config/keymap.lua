@@ -104,7 +104,7 @@ end
 local function z_nx_serve(app)
   ztab(
     "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "nx serve",
+    "nxs",
     "pwsh.exe",
     "-NoExit",
     "-Command",
