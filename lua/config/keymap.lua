@@ -79,37 +79,80 @@ local function ztab(cwd, name, ...)
   end
 end
 
+local function zrun_float(cwd, name, ...)
+  if vim.env.ZELLIJ then
+    vim.system({ "zellij", "run", "--cwd", cwd, "-n", name, "-f", "-c", "--", ... })
+  end
+end
+
+local uipath = vim.env.EdgeUILocalPath
 local function z_enable_local_ui(script, tenant)
+  local sub = vim.env.AksSub
+  local initials = vim.env.AksInitials
+  local region = vim.env.AksRegion
   zrun(
-    "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
+    uipath,
     "enable local",
     "pwsh.exe",
     "-File",
     ".\\" .. script,
     "-updateEnvironmentFile",
     "-p_subscription",
-    "IS-Dev Edge - Dev AKS",
+    sub,
     "-p_tenant",
     tenant,
     "-region",
     "local",
     "-p_slot",
-    "mrmaks",
+    initials,
     "-p_appConfigRegion",
-    "uksouth",
+    region,
     "-bff"
   )
 end
 
 local function z_nx_serve(app)
-  ztab(
-    "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "nxs",
-    "pwsh.exe",
-    "-NoExit",
-    "-Command",
-    "nx serve " .. app .. " -c bfflocal --no-tui"
-  )
+  ztab(uipath, "nxs", "pwsh.exe", "-NoExit", "-Command", "nx serve " .. app .. " -c bfflocal --no-tui")
+end
+
+local function z_b2k_debug()
+  local k8s_services = {
+    "communications",
+    "commsworker",
+    "documents",
+    "scheduling",
+    "admissionscommsworker",
+    "admissions",
+    "applicationswarehouse",
+    "authorisationservice",
+    "academicreview",
+    "applicantportalservice",
+    "admissionsworker",
+    "ids",
+    "externalusersstore",
+    "visasponsorshipuk",
+    "tasking",
+    "referencedata",
+    "notification",
+    "sendgrid-mock",
+    "backendforfrontend",
+  }
+  vim.ui.select(k8s_services, { prompt = "Service to debug:" }, function(choice)
+    if not choice then
+      return
+    end
+    local namespace = vim.env.AksNamespace
+    local port = choice == "sendgrid-mock" and 5557 or 5050
+    local service = namespace .. choice .. "-svc"
+    local cmd = string.format(
+      "Start-Job -Name kproxy -ScriptBlock { kubectl proxy } | Out-Null; "
+        .. "dsc connect --service %s --local-port %d --namespace %s -y",
+      service,
+      port,
+      namespace
+    )
+    zrun_float(vim.uv.cwd(), "dbg-" .. choice, "pwsh.exe", "-Command", cmd)
+  end)
 end
 
 vim.keymap.set("n", "<leader>zusu", function()
@@ -121,44 +164,36 @@ vim.keymap.set("n", "<leader>zusp", function()
 end, { silent = true, desc = "Zellij nx serve portal" })
 
 vim.keymap.set("n", "<leader>zues", function()
-  zrun(
-    "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "i18n extract",
-    "pwsh.exe",
-    "-Command",
-    "npm run extract-i18n:srs"
-  )
+  zrun(uipath, "i18n extract", "pwsh.exe", "-Command", "npm run extract-i18n:srs")
 end, { silent = true, desc = "Zellij i18n extract srs" })
 
+local translator = vim.env.AzureTranslator
+local translatorApiKey = vim.env.TranslatorKey
 vim.keymap.set("n", "<leader>zuts", function()
-  local apiKey = vim.env.TranslatorKey
   zrun(
-    "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
+    uipath,
     "i18n translate",
     "pwsh.exe",
     "-Command",
-    "npm run translate-i18n:srs -- --azureTranslator=mrmtranslator --apiKey=" .. apiKey
+    string.format("npm run translate-i18n:srs -- --azureTranslator=%s --apiKey=%s", translator, translatorApiKey)
   )
 end, { silent = true, desc = "Zellij i18n translate srs" })
 
 vim.keymap.set("n", "<leader>zuep", function()
-  zrun(
-    "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
-    "i18n extract",
-    "pwsh.exe",
-    "-Command",
-    "npm run extract-i18n:student-portal"
-  )
+  zrun(uipath, "i18n extract", "pwsh.exe", "-Command", "npm run extract-i18n:student-portal")
 end, { silent = true, desc = "Zellij i18n extract portal" })
 
 vim.keymap.set("n", "<leader>zutp", function()
-  local apiKey = vim.env.TranslatorKey
   zrun(
-    "C:\\edgeteam\\tribal.edge.ui\\module\\tribal.edge.ui",
+    uipath,
     "i18n translate",
     "pwsh.exe",
     "-Command",
-    "npm run translate-i18n:student-portal -- --azureTranslator=mrmtranslator --apiKey=" .. apiKey
+    string.format(
+      "npm run translate-i18n:student-portal -- --azureTranslator=%s --apiKey=%s",
+      translator,
+      translatorApiKey
+    )
   )
 end, { silent = true, desc = "Zellij i18n translate portal" })
 
@@ -185,6 +220,8 @@ end, { silent = true, desc = "Zellij dotnet build" })
 vim.keymap.set("n", "<leader>zdt", function()
   zrun(vim.uv.cwd(), "dotnet test", "pwsh.exe", "-Command", "dotnet test")
 end, { silent = true, desc = "Zellij dotnet test" })
+
+vim.keymap.set("n", "<leader>zdd", z_b2k_debug, { silent = true, desc = "Zellij dotnet debug" })
 
 -- Claude
 local claude_pane_id
