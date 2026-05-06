@@ -143,7 +143,7 @@ local function z_b2k_debug()
     end
     local namespace = vim.env.AksNamespace
     local port = choice == "sendgrid-mock" and 5557 or 5050
-    local service = namespace .. choice .. "-svc"
+    local service = namespace .. "-" .. choice .. "-svc"
     local cmd = string.format(
       "Start-Job -Name kproxy -ScriptBlock { kubectl proxy } | Out-Null; "
         .. "dsc connect --service %s --local-port %d --namespace %s -y",
