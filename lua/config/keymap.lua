@@ -89,7 +89,6 @@ local uipath = vim.env.EdgeUILocalPath
 local function z_enable_local_ui(script, tenant)
   local sub = vim.env.AksSub
   local initials = vim.env.AksInitials
-  local region = vim.env.AksRegion
   zrun(
     uipath,
     "enable local",
@@ -105,8 +104,6 @@ local function z_enable_local_ui(script, tenant)
     "local",
     "-p_slot",
     initials,
-    "-p_appConfigRegion",
-    region,
     "-bff"
   )
 end
