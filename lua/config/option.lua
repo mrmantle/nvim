@@ -18,7 +18,7 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 
 vim.o.list = true
-vim.o.listchars = "tab:» ,trail:·,nbsp:␣"
+vim.o.listchars = "tab:» ,trail:·,nbsp:␣,precedes:<,extends:>"
 
 vim.o.signcolumn = "yes"
 vim.o.timeoutlen = 300
@@ -27,6 +27,10 @@ vim.o.showmode = false
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
 vim.o.mouse = "a"
+
+vim.o.wrap = false
+vim.o.sidescroll = 1
+vim.o.sidescrolloff = 1
 vim.o.scrolloff = 5
 
 vim.o.nu = true
