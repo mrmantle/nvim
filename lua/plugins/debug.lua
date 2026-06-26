@@ -67,10 +67,17 @@ return {
       end, {
         path = project_dir .. "/bin/Debug/",
         type = "file",
-        limit = 10,
+        limit = 50,
       })
 
-      return dlls[#dlls]
+      local newest, newest_mtime = nil, -1
+      for _, dll in ipairs(dlls) do
+        local st = vim.uv.fs_stat(dll)
+        if st and st.mtime.sec > newest_mtime then
+          newest, newest_mtime = dll, st.mtime.sec
+        end
+      end
+      return newest
     end
 
     dap.configurations.cs = {
