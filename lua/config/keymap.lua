@@ -125,6 +125,7 @@ local function z_b2k_debug()
     "academicreview",
     "applicantportalservice",
     "admissionsworker",
+    "admissionssitsworker",
     "ids",
     "externalusersstore",
     "visasponsorshipuk",
