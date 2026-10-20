@@ -144,7 +144,10 @@ local function z_b2k_debug()
     local service = namespace .. "-" .. choice .. "-svc"
     local cmd = string.format(
       "Start-Job -Name kproxy -ScriptBlock { kubectl proxy } | Out-Null; "
+        .. "& 'C:\\edgeteam\\scripts\\Set-B2kSecretEnv.ps1' -Namespace %s -Service %s; "
         .. "dsc connect --service %s --local-port %d --namespace %s -y",
+      namespace,
+      choice,
       service,
       port,
       namespace
