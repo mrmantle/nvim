@@ -87,7 +87,6 @@ end
 
 local uipath = vim.env.EdgeUILocalPath
 local function z_enable_local_ui(script, tenant)
-  local sub = vim.env.AksSub
   local initials = vim.env.AksInitials
   zrun(
     uipath,
@@ -95,21 +94,16 @@ local function z_enable_local_ui(script, tenant)
     "pwsh.exe",
     "-File",
     ".\\" .. script,
-    "-updateEnvironmentFile",
-    "-p_subscription",
-    sub,
-    "-p_tenant",
-    tenant,
-    "-region",
-    "local",
     "-p_slot",
     initials,
-    "-bff"
+    "-p_tenant",
+    tenant,
+    "-updateEnvironmentFile"
   )
 end
 
 local function z_nx_serve(app)
-  ztab(uipath, "nxs", "pwsh.exe", "-NoExit", "-Command", "nx serve " .. app .. " -c bfflocal --no-tui")
+  ztab(uipath, "nxs", "pwsh.exe", "-NoExit", "-Command", "nx serve " .. app .. " -c local --no-tui")
 end
 
 local function z_b2k_debug()
